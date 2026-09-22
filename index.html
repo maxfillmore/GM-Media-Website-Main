@@ -556,25 +556,6 @@
           <div style="font-size:17px;font-weight:800;color:#f5f4f2;line-height:1.35">Patient and doctor interviews, lit and framed by our crew</div>
         </div>
       </div>
-      <sc-if value="{{ showPricing }}" hint-placeholder-val="{{ true }}">
-        <div style="background:#17171a;border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px;display:flex;flex-direction:column;justify-content:space-between;gap:26px">
-          <div>
-            <div style="color:#ec3013;font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.14em;margin-bottom:18px">Investment</div>
-            <div style="display:flex;align-items:flex-end;gap:8px">
-              <span style="font-size:clamp(34px,4vw,48px);font-weight:900;letter-spacing:-0.03em;line-height:1;white-space:nowrap">{{ feeLabel }}</span>
-              <span style="font-size:17px;font-weight:700;color:rgba(255,255,255,0.5);padding-bottom:6px;flex:none;white-space:nowrap">/ month</span>
-            </div>
-            <div style="font-size:15.5px;color:rgba(255,255,255,0.7);margin-top:10px;line-height:1.6">{{ termLabel }} — priced on your practice size, case mix and shoot volume. Long enough for compounding to actually show up in the schedule. One team, one price, no à la carte.</div>
-          </div>
-          <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:22px">
-            <div style="font-size:15.5px;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:20px">Most practices cover it with a single full-arch or veneer case. Check it against your own numbers first.</div>
-            <div style="display:flex;flex-wrap:wrap;gap:12px">
-              <a href="#book" style="background:#ec3013;color:#fff;font-size:12.5px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;padding:16px 28px;border-radius:999px" style-hover="background:#ff4d2e;color:#fff">Book a Call</a>
-              <a href="financial-model.html" style="border:1px solid rgba(255,255,255,0.22);color:#f5f4f2;font-size:12.5px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;padding:16px 28px;border-radius:999px" style-hover="background:rgba(255,255,255,0.06);color:#f5f4f2">Financial Model</a>
-            </div>
-          </div>
-        </div>
-      </sc-if>
     </div>
   </div>
 
@@ -681,7 +662,7 @@
   </sc-if>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;showPricing&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Offer&quot;},&quot;monthlyFeeMin&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:2500,&quot;min&quot;:500,&quot;max&quot;:15000,&quot;step&quot;:250,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Offer&quot;},&quot;monthlyFeeMax&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:5000,&quot;min&quot;:500,&quot;max&quot;:25000,&quot;step&quot;:250,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Offer&quot;},&quot;contractMonths&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:12,&quot;min&quot;:3,&quot;max&quot;:24,&quot;step&quot;:1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Offer&quot;}}">
+<script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   state = { wide: true, menuOpen: false, showTop: false };
 
@@ -1066,10 +1047,6 @@ class Component extends DCLogic {
   }
 
   renderVals() {
-    const feeMin = this.props.monthlyFeeMin ?? 2500;
-    const feeMax = this.props.monthlyFeeMax ?? 5000;
-    const money = n => '$' + (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
-    const months = this.props.contractMonths ?? 12;
     return {
       showTop: this.state.showTop,
       toTop: () => {
@@ -1092,10 +1069,7 @@ class Component extends DCLogic {
       narrowNav: !this.state.wide,
       menuOpen: !this.state.wide && this.state.menuOpen,
       toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
-      closeMenu: () => this.setState({ menuOpen: false }),
-      showPricing: this.props.showPricing ?? true,
-      feeLabel: money(feeMin) + '–' + money(feeMax),
-      termLabel: months + '-month engagement'
+      closeMenu: () => this.setState({ menuOpen: false })
     };
   }
 }
