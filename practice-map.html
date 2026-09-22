@@ -199,7 +199,10 @@ function draw() {
       .text('GM Media HQ');
   }
 
-  if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function startPulse() {
+    if (reduceMotion) return;
     let t0 = null;
     const tick = ts => {
       if (t0 === null) t0 = ts;
@@ -210,6 +213,44 @@ function draw() {
       requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
+  }
+
+  // Dots fall in one by one over 3s, north to south.
+  if (reduceMotion) {
+    startPulse();
+  } else {
+    const SPAN = 3000, FALL = 560, RISE = 78;
+    const order = pts.map((d, i) => i).sort((a, b) => pts[a].y - pts[b].y);
+    const delay = [];
+    order.forEach((idx, slot) => {
+      delay[idx] = pts.length > 1 ? (slot / (pts.length - 1)) * (SPAN - FALL) : 0;
+    });
+    const ease = t => 1 - Math.pow(1 - t, 3);
+    const prog = (el, i) => Math.max(0, Math.min(1, (el - delay[i]) / FALL));
+    const offY = (el, i) => -(1 - ease(prog(el, i))) * RISE;
+    const fade = (el, i) => Math.max(0, Math.min(1, (el - delay[i]) / (FALL * 0.4)));
+
+    halos.attr('opacity', 0);
+    pulses.attr('opacity', 0);
+    dots.attr('opacity', 0);
+    if (hqLine) hqLine.attr('opacity', 0);
+    if (hqText) hqText.attr('opacity', 0);
+
+    let s0 = null;
+    const drop = ts => {
+      if (s0 === null) s0 = ts;
+      const el = ts - s0;
+      dots.attr('cy', (d, i) => d.y + offY(el, i)).attr('opacity', (d, i) => fade(el, i));
+      halos.attr('cy', (d, i) => d.y + offY(el, i)).attr('opacity', (d, i) => fade(el, i));
+      if (el < SPAN) { requestAnimationFrame(drop); return; }
+      dots.attr('cy', d => d.y).attr('opacity', null);
+      halos.attr('cy', d => d.y).attr('opacity', null);
+      pulses.attr('opacity', null);
+      if (hqLine) hqLine.transition().duration(420).attr('opacity', 1);
+      if (hqText) hqText.transition().duration(420).attr('opacity', 1);
+      startPulse();
+    };
+    requestAnimationFrame(drop);
   }
 
   // zoom: buttons and drag-pan only — wheel stays with the page

@@ -132,6 +132,13 @@
 
   <sc-if value="{{ showChips }}" hint-placeholder-val="{{ false }}">
   <div style="max-width:1180px;margin:0 auto;padding:44px 24px 0">
+    <div style="display:flex;align-items:center;justify-content:center;gap:9px;margin-bottom:14px">
+      <span style="font-size:11.5px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);text-align:center">Select a client to view breakdown</span>
+      <span aria-hidden="true" style="flex:none;display:flex;align-items:center;gap:3px;color:#ec3013">
+        <span style="width:16px;height:2px;background:currentColor;display:block;border-radius:2px"></span>
+        <span style="width:0;height:0;border-left:7px solid currentColor;border-top:5px solid transparent;border-bottom:5px solid transparent;display:block"></span>
+      </span>
+    </div>
     <div class="gm-rail" style="display:flex;gap:10px;overflow-x:auto;padding-bottom:14px;margin-bottom:34px;scrollbar-width:thin">
       <sc-for list="{{ chips }}" as="c" hint-placeholder-count="8">
         <button type="button" onClick="{{ c.select }}" style="{{ c.chipStyle }}">
