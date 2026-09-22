@@ -357,6 +357,12 @@
       <div style="margin-top:16px;background:#17171a;border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px">
         <p style="margin:0;font-size:16px;line-height:1.6;color:rgba(255,255,255,0.7);max-width:600px">Every number here came from a practice that had no content system twelve months earlier.</p>
       </div>
+      <div style="display:flex;justify-content:center;padding:36px 0 0">
+        <a href="client-breakdowns.html" style="display:inline-flex;align-items:center;gap:11px;background:#ec3013;color:#fff;font-size:13.5px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;padding:19px 34px;border-radius:999px;box-shadow:0 8px 26px rgba(236,48,19,0.3)" style-hover="background:#ff3d1d">
+          View full client breakdowns
+          <span aria-hidden="true" style="width:0;height:0;border-left:7px solid #fff;border-top:5px solid transparent;border-bottom:5px solid transparent;display:block"></span>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -519,6 +525,13 @@
           </div>
         </div>
       </div>
+
+      <div style="display:flex;justify-content:center;padding:44px 0 0">
+        <a href="client-breakdowns.html" style="display:inline-flex;align-items:center;gap:11px;background:#ec3013;color:#fff;font-size:13.5px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;padding:19px 34px;border-radius:999px;box-shadow:0 8px 26px rgba(236,48,19,0.3)" style-hover="background:#ff3d1d">
+          View full client breakdowns
+          <span aria-hidden="true" style="width:0;height:0;border-left:7px solid #fff;border-top:5px solid transparent;border-bottom:5px solid transparent;display:block"></span>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -660,11 +673,17 @@
     </div>
   </div>
 
+
+  <sc-if value="{{ showTop }}" hint-placeholder-val="{{ false }}">
+    <button type="button" onClick="{{ toTop }}" aria-label="Back to top" style="position:fixed;top:84px;right:18px;z-index:49;width:44px;height:44px;border-radius:999px;border:1px solid rgba(255,255,255,0.2);background:rgba(12,12,13,0.78);backdrop-filter:blur(10px);color:#f5f4f2;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;box-shadow:0 8px 24px rgba(0,0,0,0.45)" style-hover="background:#ec3013;border-color:#ec3013">
+      <span aria-hidden="true" style="width:0;height:0;border-bottom:8px solid currentColor;border-left:6px solid transparent;border-right:6px solid transparent;display:block"></span>
+    </button>
+  </sc-if>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;showPricing&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Offer&quot;},&quot;monthlyFeeMin&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:2500,&quot;min&quot;:500,&quot;max&quot;:15000,&quot;step&quot;:250,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Offer&quot;},&quot;monthlyFeeMax&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:5000,&quot;min&quot;:500,&quot;max&quot;:25000,&quot;step&quot;:250,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Offer&quot;},&quot;contractMonths&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:12,&quot;min&quot;:3,&quot;max&quot;:24,&quot;step&quot;:1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Offer&quot;}}">
 class Component extends DCLogic {
-  state = { wide: true, menuOpen: false };
+  state = { wide: true, menuOpen: false, showTop: false };
 
   componentDidMount() {
     this.measure = () => {
@@ -675,6 +694,24 @@ class Component extends DCLogic {
     this.rootEl = document.querySelector('[data-nav-root]') || document.body;
     this.measure();
     window.addEventListener('resize', this.measure);
+    this.scroller = () => {
+      let el = this.rootEl;
+      while (el && el !== document.body && el !== document.documentElement) {
+        const ov = getComputedStyle(el).overflowY;
+        if ((ov === 'auto' || ov === 'scroll') && el.scrollHeight > el.clientHeight + 4) return el;
+        el = el.parentElement;
+      }
+      return document.scrollingElement || document.documentElement;
+    };
+    this.onTopScroll = () => {
+      const sc = this.scroller();
+      const y = Math.max(window.scrollY || 0, (sc && sc.scrollTop) || 0);
+      const show = y > 500;
+      if (show !== this.state.showTop) this.setState({ showTop: show });
+    };
+    document.addEventListener('scroll', this.onTopScroll, true);
+    window.addEventListener('scroll', this.onTopScroll, { passive: true });
+    this.topTimer = setInterval(this.onTopScroll, 300);
     this.startRays();
     this.startBroll();
     this.startLoopClips();
@@ -1034,6 +1071,15 @@ class Component extends DCLogic {
     const money = n => '$' + (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
     const months = this.props.contractMonths ?? 12;
     return {
+      showTop: this.state.showTop,
+      toTop: () => {
+        const sc = this.scroller ? this.scroller() : (document.scrollingElement || document.documentElement);
+        if (sc) {
+          if (sc.scrollTo) { try { sc.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { sc.scrollTop = 0; } }
+          else { sc.scrollTop = 0; }
+        }
+        try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { window.scrollTo(0, 0); }
+      },
       pick0: () => this.brollPick && this.brollPick(0),
       pick1: () => this.brollPick && this.brollPick(1),
       pick2: () => this.brollPick && this.brollPick(2),

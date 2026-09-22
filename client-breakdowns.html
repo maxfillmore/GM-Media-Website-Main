@@ -204,11 +204,11 @@
         </div>
 
         <sc-if value="{{ active.hasStats }}" hint-placeholder-val="{{ true }}">
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border-bottom:1px solid rgba(255,255,255,0.08)">
+          <div style="display:grid;grid-template-columns:{{ mStatCols }};border-bottom:1px solid rgba(255,255,255,0.08)">
             <sc-for list="{{ active.stats }}" as="s" hint-placeholder-count="2">
-              <div style="padding:26px 30px;border-right:1px solid rgba(255,255,255,0.06);min-width:0">
+              <div style="padding:{{ mStatPad }};border-right:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);min-width:0;text-align:{{ mText }}">
                 <div style="font-size:clamp(22px,3.4vw,36px);font-weight:900;letter-spacing:-0.025em;color:#ec3013;line-height:1.04;overflow-wrap:anywhere">{{ s.v }}</div>
-                <div style="margin-top:8px;font-size:12.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.5)">{{ s.l }}</div>
+                <div style="margin-top:8px;font-size:{{ mStatLabel }};font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.5)">{{ s.l }}</div>
               </div>
             </sc-for>
           </div>
@@ -558,6 +558,9 @@ class Component extends DCLogic {
       mReelOverflow: wide ? 'visible' : 'auto',
       mReelPad: wide ? '0' : '12px',
       mReelViewSize: wide ? 'clamp(23px,3.4vw,32px)' : '19px',
+      mStatCols: wide ? 'repeat(auto-fit,minmax(200px,1fr))' : 'repeat(2,minmax(0,1fr))',
+      mStatPad: wide ? '26px 30px' : '18px 14px',
+      mStatLabel: wide ? '12.5px' : '11px',
       wideNav: wide,
       narrowNav: !wide,
       menuOpen: this.state.menuOpen,
