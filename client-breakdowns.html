@@ -60,14 +60,14 @@
 
   <div style="position:sticky;top:0;z-index:50;background:rgba(12,12,13,0.86);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.08)">
     <div style="max-width:1180px;margin:0 auto;padding:0 24px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px">
-      <a href="index.html" aria-label="GM Media" style="display:flex;align-items:center;flex:none"><img src="assets/gm-media-logo.webp" alt="GM Media" style="height:27px;width:auto;display:block"></a>
+      <a href="Home.dc.html" aria-label="GM Media" style="display:flex;align-items:center;flex:none"><img src="assets/gm-media-logo.webp" alt="GM Media" style="height:27px;width:auto;display:block"></a>
       <div style="display:flex;align-items:center;gap:26px;flex-wrap:nowrap">
         <sc-if value="{{ wideNav }}" hint-placeholder-val="{{ true }}">
           <div style="display:flex;align-items:center;gap:26px">
-            <a href="gages-story.html" style="color:rgba(255,255,255,0.7);font-size:13.5px;font-weight:600;white-space:nowrap">Gage's Story</a>
-            <a href="client-breakdowns.html" style="color:#f5f4f2;font-size:13.5px;font-weight:700;white-space:nowrap">Breakdowns</a>
-            <a href="financial-model.html" style="color:rgba(255,255,255,0.7);font-size:13.5px;font-weight:600;white-space:nowrap">Financial Model</a>
-            <a href="index.html#faq" style="color:rgba(255,255,255,0.7);font-size:13.5px;font-weight:600;white-space:nowrap">FAQ</a>
+            <a href="Gages%20Story.dc.html" style="color:rgba(255,255,255,0.7);font-size:13.5px;font-weight:600;white-space:nowrap">Gage's Story</a>
+            <a href="Client%20Breakdowns.dc.html" style="color:#f5f4f2;font-size:13.5px;font-weight:700;white-space:nowrap">Breakdowns</a>
+            <a href="Financial%20Model.dc.html" style="color:rgba(255,255,255,0.7);font-size:13.5px;font-weight:600;white-space:nowrap">Financial Model</a>
+            <a href="Home.dc.html#faq" style="color:rgba(255,255,255,0.7);font-size:13.5px;font-weight:600;white-space:nowrap">FAQ</a>
           </div>
         </sc-if>
         <a href="#book" style="background:#ec3013;color:#fff;font-size:12.5px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;padding:14px 22px;border-radius:999px;box-shadow:0 6px 20px rgba(236,48,19,0.28);white-space:nowrap" style-hover="background:#ff4d2e;color:#fff">Book a Call</a>
@@ -82,10 +82,10 @@
     </div>
     <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
       <div style="border-top:1px solid rgba(255,255,255,0.08);padding:14px 24px 22px;display:flex;flex-direction:column;gap:2px">
-        <a href="gages-story.html" onClick="{{ closeMenu }}" style="color:rgba(255,255,255,0.7);font-size:16px;font-weight:600;padding:14px 0;min-height:44px;display:flex;align-items:center">Gage's Story</a>
-        <a href="client-breakdowns.html" onClick="{{ closeMenu }}" style="color:#f5f4f2;font-size:16px;font-weight:700;padding:14px 0;min-height:44px;display:flex;align-items:center">Breakdowns</a>
-        <a href="financial-model.html" onClick="{{ closeMenu }}" style="color:rgba(255,255,255,0.7);font-size:16px;font-weight:600;padding:14px 0;min-height:44px;display:flex;align-items:center">Financial Model</a>
-        <a href="index.html#faq" onClick="{{ closeMenu }}" style="color:rgba(255,255,255,0.7);font-size:16px;font-weight:600;padding:14px 0;min-height:44px;display:flex;align-items:center">FAQ</a>
+        <a href="Gages%20Story.dc.html" onClick="{{ closeMenu }}" style="color:rgba(255,255,255,0.7);font-size:16px;font-weight:600;padding:14px 0;min-height:44px;display:flex;align-items:center">Gage's Story</a>
+        <a href="Client%20Breakdowns.dc.html" onClick="{{ closeMenu }}" style="color:#f5f4f2;font-size:16px;font-weight:700;padding:14px 0;min-height:44px;display:flex;align-items:center">Breakdowns</a>
+        <a href="Financial%20Model.dc.html" onClick="{{ closeMenu }}" style="color:rgba(255,255,255,0.7);font-size:16px;font-weight:600;padding:14px 0;min-height:44px;display:flex;align-items:center">Financial Model</a>
+        <a href="Home.dc.html#faq" onClick="{{ closeMenu }}" style="color:rgba(255,255,255,0.7);font-size:16px;font-weight:600;padding:14px 0;min-height:44px;display:flex;align-items:center">FAQ</a>
       </div>
     </sc-if>
   </div>
@@ -225,7 +225,12 @@
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px">
               <sc-for list="{{ active.reels }}" as="reel" hint-placeholder-count="3">
                 <div style="position:relative;aspect-ratio:9/16;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);background:#121214">
-                  <image-slot id="{{ reel.slotId }}" shape="rect" fit="cover" placeholder="Drop reel thumbnail"></image-slot>
+                  <sc-if value="{{ reel.hasThumb }}" hint-placeholder-val="{{ false }}">
+                    <img src="{{ reel.thumb }}" alt="{{ reel.label }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+                  </sc-if>
+                  <sc-if value="{{ reel.noThumb }}" hint-placeholder-val="{{ true }}">
+                    <image-slot id="{{ reel.slotId }}" shape="rect" fit="cover" placeholder=""></image-slot>
+                  </sc-if>
                   <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(12,12,13,0) 38%,rgba(12,12,13,0.82) 100%)"></div>
                   <div style="position:absolute;left:14px;right:14px;bottom:13px;pointer-events:none;display:flex;flex-direction:column;gap:3px">
                     <div style="font-size:clamp(23px,3.4vw,32px);font-weight:900;letter-spacing:-0.03em;line-height:1;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,0.5)">{{ reel.views }}</div>
@@ -294,10 +299,10 @@
     <div style="max-width:1180px;margin:0 auto;padding:44px 24px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between">
       <div style="display:flex;align-items:center"><img src="assets/gm-media-logo.webp" alt="GM Media" style="height:30px;width:auto;display:block;opacity:0.85"></div>
       <div style="display:flex;flex-wrap:wrap;gap:22px">
-        <a href="index.html" class="gm-foot-link" style="color:rgba(255,255,255,0.5);font-size:13px;font-weight:600">Home</a>
-        <a href="gages-story.html" class="gm-foot-link" style="color:rgba(255,255,255,0.5);font-size:13px;font-weight:600">Gage's Story</a>
-        <a href="client-breakdowns.html" class="gm-foot-link" style="color:rgba(255,255,255,0.5);font-size:13px;font-weight:600">Breakdowns</a>
-        <a href="financial-model.html" class="gm-foot-link" style="color:rgba(255,255,255,0.5);font-size:13px;font-weight:600">Financial Model</a>
+        <a href="Home.dc.html" class="gm-foot-link" style="color:rgba(255,255,255,0.5);font-size:13px;font-weight:600">Home</a>
+        <a href="Gages%20Story.dc.html" class="gm-foot-link" style="color:rgba(255,255,255,0.5);font-size:13px;font-weight:600">Gage's Story</a>
+        <a href="Client%20Breakdowns.dc.html" class="gm-foot-link" style="color:rgba(255,255,255,0.5);font-size:13px;font-weight:600">Breakdowns</a>
+        <a href="Financial%20Model.dc.html" class="gm-foot-link" style="color:rgba(255,255,255,0.5);font-size:13px;font-weight:600">Financial Model</a>
       </div>
       <div style="font-size:13px;color:rgba(255,255,255,0.5)">© 2026 GM Media</div>
     </div>
@@ -322,9 +327,9 @@ const CLIENTS = [
     tiktok: 'https://www.tiktok.com/@drjordandavis',
     tiktokHandle: '@drjordandavis',
     reels: [
-      { url: 'https://www.instagram.com/reel/DM8y9X9JUen/', views: '10.7M' },
-      { url: 'https://www.instagram.com/reel/DDNbZ4nJ9t1/', views: '9.4M' },
-      { url: 'https://www.instagram.com/reel/C0ccpo2ShTr/', views: '16.7M' }
+      { url: 'https://www.instagram.com/reel/DM8y9X9JUen/', views: '10.7M', thumb: 'assets/reels/reel-davis-1.webp' },
+      { url: 'https://www.instagram.com/reel/DDNbZ4nJ9t1/', views: '9.4M', thumb: 'assets/reels/reel-davis-2.webp' },
+      { url: 'https://www.instagram.com/reel/C0ccpo2ShTr/', views: '16.7M', thumb: 'assets/reels/reel-davis-3.webp' }
     ]
   },
   {
@@ -342,9 +347,9 @@ const CLIENTS = [
     instagram: 'https://www.instagram.com/sarahwinterdental/',
     handle: '@sarahwinterdental',
     reels: [
-      { url: 'https://www.instagram.com/reel/DNOgHBwy6xW/', views: '125K' },
-      { url: 'https://www.instagram.com/reel/DYfRYTKRyV7/', views: '104K' },
-      { url: 'https://www.instagram.com/reel/DY2jmk9Pv7O/', views: '562K' }
+      { url: 'https://www.instagram.com/reel/DNOgHBwy6xW/', views: '125K', thumb: 'assets/reels/reel-winter-1.webp' },
+      { url: 'https://www.instagram.com/reel/DYfRYTKRyV7/', views: '104K', thumb: 'assets/reels/reel-winter-2.webp' },
+      { url: 'https://www.instagram.com/reel/DY2jmk9Pv7O/', views: '562K', thumb: 'assets/reels/reel-winter-3.webp' }
     ]
   },
   {
@@ -592,12 +597,15 @@ class Component extends DCLogic {
         tiktokHandle: c.tiktokHandle || '',
         hasReels: !!(c.reels && c.reels.length),
         noReels: !(c.reels && c.reels.length),
-        reelsNote: c.reels && c.reels.length ? 'Drop a thumbnail, or tap ▸ to open on Instagram' : 'Clips pending',
+        reelsNote: c.reels && c.reels.length ? 'Press the play button to open the reel on Instagram' : 'Clips pending',
         reels: (c.reels || []).map((r, n) => ({
           url: r.url,
           views: r.views || '—',
           viewsLabel: r.label || (r.views ? 'views' : 'views pending'),
           label: 'Reel ' + (n + 1) + ' on ' + (/tiktok\.com/.test(r.url) ? 'TikTok' : 'Instagram'),
+          thumb: r.thumb || ('assets/reels/reel-' + c.id + '-' + (n + 1) + '.webp'),
+          hasThumb: true,
+          noThumb: false,
           slotId: 'reel-' + c.id + '-' + (n + 1)
         }))
       },
