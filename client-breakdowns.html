@@ -60,14 +60,15 @@
 
   <div style="position:sticky;top:0;z-index:50;background:rgba(12,12,13,0.86);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.08)">
     <div style="max-width:1180px;margin:0 auto;padding:0 24px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px">
-      <a href="Home.dc.html" aria-label="GM Media" style="display:flex;align-items:center;flex:none"><img src="assets/gm-media-logo.webp" alt="GM Media" style="height:27px;width:auto;display:block"></a>
+      <a href="index.html" aria-label="GM Media" style="display:flex;align-items:center;flex:none"><img src="assets/gm-media-logo.webp" alt="GM Media" style="height:27px;width:auto;display:block"></a>
       <div style="display:flex;align-items:center;gap:26px;flex-wrap:nowrap">
         <sc-if value="{{ wideNav }}" hint-placeholder-val="{{ true }}">
           <div style="display:flex;align-items:center;gap:26px">
-            <a href="Gages%20Story.dc.html" style="color:rgba(255,255,255,0.7);font-size:13.5px;font-weight:600;white-space:nowrap">Gage's Story</a>
-            <a href="Client%20Breakdowns.dc.html" style="color:#f5f4f2;font-size:13.5px;font-weight:700;white-space:nowrap">Breakdowns</a>
-            <a href="Financial%20Model.dc.html" style="color:rgba(255,255,255,0.7);font-size:13.5px;font-weight:600;white-space:nowrap">Financial Model</a>
-            <a href="Home.dc.html#faq" style="color:rgba(255,255,255,0.7);font-size:13.5px;font-weight:600;white-space:nowrap">FAQ</a>
+            <a href="gages-story.html" style="color:rgba(255,255,255,0.7);font-size:13.5px;font-weight:600;white-space:nowrap">Gage's Story</a>
+            <a href="client-breakdowns.html" style="color:#f5f4f2;font-size:13.5px;font-weight:700;white-space:nowrap">Client Breakdowns</a>
+            <a href="index.html#case-studies" style="color:rgba(255,255,255,0.7);font-size:13.5px;font-weight:600;white-space:nowrap">Case Studies</a>
+            <a href="financial-model.html" style="color:rgba(255,255,255,0.7);font-size:13.5px;font-weight:600;white-space:nowrap">Financial Model</a>
+            <a href="index.html#faq" style="color:rgba(255,255,255,0.7);font-size:13.5px;font-weight:600;white-space:nowrap">FAQ</a>
           </div>
         </sc-if>
         <a href="#book" style="background:#ec3013;color:#fff;font-size:12.5px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;padding:14px 22px;border-radius:999px;box-shadow:0 6px 20px rgba(236,48,19,0.28);white-space:nowrap" style-hover="background:#ff4d2e;color:#fff">Book a Call</a>
@@ -82,10 +83,11 @@
     </div>
     <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
       <div style="border-top:1px solid rgba(255,255,255,0.08);padding:14px 24px 22px;display:flex;flex-direction:column;gap:2px">
-        <a href="Gages%20Story.dc.html" onClick="{{ closeMenu }}" style="color:rgba(255,255,255,0.7);font-size:16px;font-weight:600;padding:14px 0;min-height:44px;display:flex;align-items:center">Gage's Story</a>
-        <a href="Client%20Breakdowns.dc.html" onClick="{{ closeMenu }}" style="color:#f5f4f2;font-size:16px;font-weight:700;padding:14px 0;min-height:44px;display:flex;align-items:center">Breakdowns</a>
-        <a href="Financial%20Model.dc.html" onClick="{{ closeMenu }}" style="color:rgba(255,255,255,0.7);font-size:16px;font-weight:600;padding:14px 0;min-height:44px;display:flex;align-items:center">Financial Model</a>
-        <a href="Home.dc.html#faq" onClick="{{ closeMenu }}" style="color:rgba(255,255,255,0.7);font-size:16px;font-weight:600;padding:14px 0;min-height:44px;display:flex;align-items:center">FAQ</a>
+        <a href="gages-story.html" onClick="{{ closeMenu }}" style="color:rgba(255,255,255,0.7);font-size:16px;font-weight:600;padding:14px 0;min-height:44px;display:flex;align-items:center">Gage's Story</a>
+        <a href="client-breakdowns.html" onClick="{{ closeMenu }}" style="color:#f5f4f2;font-size:16px;font-weight:700;padding:14px 0;min-height:44px;display:flex;align-items:center">Client Breakdowns</a>
+            <a href="index.html#case-studies" onClick="{{ closeMenu }}" style="color:rgba(255,255,255,0.7);font-size:16px;font-weight:600;padding:14px 0;min-height:44px;display:flex;align-items:center">Case Studies</a>
+        <a href="financial-model.html" onClick="{{ closeMenu }}" style="color:rgba(255,255,255,0.7);font-size:16px;font-weight:600;padding:14px 0;min-height:44px;display:flex;align-items:center">Financial Model</a>
+        <a href="index.html#faq" onClick="{{ closeMenu }}" style="color:rgba(255,255,255,0.7);font-size:16px;font-weight:600;padding:14px 0;min-height:44px;display:flex;align-items:center">FAQ</a>
       </div>
     </sc-if>
   </div>
@@ -93,7 +95,7 @@
   <div id="top" style="border-bottom:1px solid rgba(255,255,255,0.08)">
     <div style="max-width:1180px;margin:0 auto;padding:64px 24px 52px">
       <div style="color:#ec3013;font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.14em;margin-bottom:16px">Client breakdowns</div>
-      <h1 style="margin:0 0 16px;font-weight:900;font-size:clamp(34px,6vw,62px);line-height:1.0;letter-spacing:-0.03em;max-width:900px;text-wrap:balance">Every practice. Every number. Open the books.</h1>
+      <h1 style="margin:0 0 16px;font-weight:900;font-size:clamp(34px,6vw,62px);line-height:1.0;letter-spacing:-0.03em;max-width:900px;text-wrap:balance">Client breakdowns</h1>
       <p style="margin:0;font-size:17.5px;line-height:1.6;color:rgba(255,255,255,0.7);max-width:620px;text-wrap:pretty">What changed in their schedule, the work we published, and a direct link to the account so you can judge it yourself.</p>
     </div>
   </div>
@@ -171,14 +173,14 @@
       <div style="border:1px solid rgba(255,255,255,0.08);border-radius:22px;background:#17171a;overflow:hidden">
 
         <div style="padding:30px 30px 26px;border-bottom:1px solid rgba(255,255,255,0.08)">
-          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:18px">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:18px;justify-content:{{ mAlign }}">
             <span role="img" aria-label="{{ active.name }}" style="{{ active.photoStyle }}"></span>
-            <div style="min-width:0;flex:1 1 200px">
+            <div style="min-width:0;flex:1 1 200px;text-align:{{ mText }}">
               <h2 style="margin:0 0 6px;font-size:clamp(23px,3vw,31px);font-weight:900;letter-spacing:-0.02em;line-height:1.1">{{ active.name }}</h2>
               <div style="font-size:14.5px;color:rgba(255,255,255,0.55);font-weight:600">{{ active.practice }}</div>
             </div>
-            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:12px;flex:none;margin-left:auto">
-              <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:flex-end">
+            <div style="display:flex;flex-direction:column;align-items:{{ mLogoAlign }};gap:12px;flex:none;margin-left:{{ mLogoPush }}">
+              <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:{{ mLogoAlign }}">
                 <sc-if value="{{ active.hasLogo }}" hint-placeholder-val="{{ true }}">
                   <span role="img" aria-label="{{ active.practice }}" style="{{ active.logoStyle }}"></span>
                 </sc-if>
@@ -189,12 +191,9 @@
                   <span role="img" aria-label="{{ active.logo2Label }}" style="{{ active.logo2Style }}"></span>
                 </sc-if>
               </div>
-              <sc-if value="{{ active.hasBadge }}" hint-placeholder-val="{{ true }}">
-                <div style="font-size:11.5px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#ec3013;border:1px solid rgba(236,48,19,0.35);border-radius:999px;padding:9px 16px;white-space:nowrap">{{ active.badge }}</div>
-              </sc-if>
             </div>
           </div>
-          <p style="margin:20px 0 0;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,0.78);max-width:660px;text-wrap:pretty">{{ active.summary }}</p>
+          <p style="margin:20px auto 0;margin-left:{{ mLogoPush }};font-size:16.5px;line-height:1.6;color:rgba(255,255,255,0.78);max-width:660px;text-wrap:pretty;text-align:{{ mText }}">{{ active.summary }}</p>
         </div>
 
         <sc-if value="{{ active.hasStats }}" hint-placeholder-val="{{ true }}">
@@ -209,7 +208,7 @@
         </sc-if>
 
         <div style="padding:30px">
-          <div style="font-size:11px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:16px">In their words</div>
+          <div style="font-size:11px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:16px;text-align:{{ mText }}">In their words</div>
           <div style="{{ active.videoFrameStyle }}">
             <iframe src="{{ active.videoSrc }}" title="{{ active.videoTitle }}" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="" style="position:absolute;inset:0;width:100%;height:100%;border:0;display:block"></iframe>
           </div>
@@ -217,12 +216,12 @@
 
         <sc-if value="{{ active.showReels }}" hint-placeholder-val="{{ true }}">
         <div style="padding:0 30px 30px">
-          <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:16px">
+          <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:{{ mBetween }};gap:12px;margin-bottom:16px;text-align:{{ mText }}">
             <div style="font-size:11px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.4)">Reels we published</div>
             <div style="font-size:12.5px;color:rgba(255,255,255,0.35);font-weight:600">{{ active.reelsNote }}</div>
           </div>
           <sc-if value="{{ active.hasReels }}" hint-placeholder-val="{{ true }}">
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px">
+            <div style="display:grid;grid-template-columns:{{ mReelCols }};justify-content:{{ mAlign }};gap:14px">
               <sc-for list="{{ active.reels }}" as="reel" hint-placeholder-count="3">
                 <div style="position:relative;aspect-ratio:9/16;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);background:#121214">
                   <sc-if value="{{ reel.hasThumb }}" hint-placeholder-val="{{ false }}">
@@ -299,10 +298,11 @@
     <div style="max-width:1180px;margin:0 auto;padding:44px 24px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between">
       <div style="display:flex;align-items:center"><img src="assets/gm-media-logo.webp" alt="GM Media" style="height:30px;width:auto;display:block;opacity:0.85"></div>
       <div style="display:flex;flex-wrap:wrap;gap:22px">
-        <a href="Home.dc.html" class="gm-foot-link" style="color:rgba(255,255,255,0.5);font-size:13px;font-weight:600">Home</a>
-        <a href="Gages%20Story.dc.html" class="gm-foot-link" style="color:rgba(255,255,255,0.5);font-size:13px;font-weight:600">Gage's Story</a>
-        <a href="Client%20Breakdowns.dc.html" class="gm-foot-link" style="color:rgba(255,255,255,0.5);font-size:13px;font-weight:600">Breakdowns</a>
-        <a href="Financial%20Model.dc.html" class="gm-foot-link" style="color:rgba(255,255,255,0.5);font-size:13px;font-weight:600">Financial Model</a>
+        <a href="index.html" class="gm-foot-link" style="color:rgba(255,255,255,0.5);font-size:13px;font-weight:600">Home</a>
+        <a href="gages-story.html" class="gm-foot-link" style="color:rgba(255,255,255,0.5);font-size:13px;font-weight:600">Gage's Story</a>
+        <a href="client-breakdowns.html" class="gm-foot-link" style="color:rgba(255,255,255,0.5);font-size:13px;font-weight:600">Client Breakdowns</a>
+            <a href="index.html#case-studies" class="gm-foot-link" style="color:rgba(255,255,255,0.5);font-size:13px;font-weight:600">Case Studies</a>
+        <a href="financial-model.html" class="gm-foot-link" style="color:rgba(255,255,255,0.5);font-size:13px;font-weight:600">Financial Model</a>
       </div>
       <div style="font-size:13px;color:rgba(255,255,255,0.5)">© 2026 GM Media</div>
     </div>
@@ -539,6 +539,12 @@ class Component extends DCLogic {
     const rowBase = 'display:flex;align-items:center;gap:13px;width:100%;padding:11px 14px;border-radius:14px;cursor:pointer;font-family:inherit;text-align:left;transition:background 160ms ease,border-color 160ms ease;';
 
     return {
+      mAlign: wide ? 'flex-start' : 'center',
+      mText: wide ? 'left' : 'center',
+      mLogoAlign: wide ? 'flex-end' : 'center',
+      mLogoPush: wide ? 'auto' : '0',
+      mBetween: wide ? 'space-between' : 'center',
+      mReelCols: wide ? 'repeat(auto-fit,minmax(150px,1fr))' : 'minmax(0,min(260px,100%))',
       wideNav: wide,
       narrowNav: !wide,
       menuOpen: this.state.menuOpen,
