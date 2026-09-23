@@ -22,6 +22,14 @@
   ::selection { background: #c7ab7e; color: #0e0d0c; }
   @keyframes gm-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   @media (max-width: 720px) {
+    .gm-hero-video { inset: 0 0 auto 0 !important; height: 78vw !important; min-height: 300px; -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%); mask-image: linear-gradient(180deg, #000 55%, transparent 100%); }
+    .gm-bar { height: 60px !important; padding: 0 8px 0 16px !important; gap: 14px !important; }
+    .gm-bar img[alt="GM Media"] { height: 22px !important; }
+    .gm-stats { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 10px !important; margin-top: 40px !important; }
+    .gm-stat { padding: 18px 16px 16px !important; border-radius: 16px !important; }
+    .gm-stat-v { font-size: 32px !important; }
+    .gm-stat div:not(.gm-stat-v) { font-size: 10px !important; letter-spacing: 0.14em !important; margin-top: 10px !important; }
+    .gm-stat div:last-child:not(:nth-child(2)) { font-size: 11.5px !important; letter-spacing: 0.01em !important; margin-top: 6px !important; }
     .gm-marquee-track { animation-duration: 24s !important; }
     .gm-hero-stat { margin-left: 0 !important; padding: 30px 26px !important; }
     .gm-hero-cta { margin-top: 40px !important; }
@@ -49,9 +57,8 @@
   <div style="position:sticky;top:0;z-index:50;padding:14px 16px 0">
     <div style="max-width:1320px;margin:0 auto;position:relative">
       <div style="background:rgba(14,13,12,0.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.12);border-radius:999px;box-shadow:0 10px 36px rgba(0,0,0,0.35);overflow:hidden">
-        <div style="height:68px;padding:0 10px 0 22px;display:flex;align-items:center;gap:22px">
+        <div class="gm-bar" style="height:68px;padding:0 10px 0 22px;display:flex;align-items:center;gap:22px">
           <a href="#top" aria-label="GM Media" style="display:flex;align-items:center;flex:none"><img src="assets/gm-media-logo.webp" alt="GM Media" style="height:26px;width:auto;display:block" /></a>
-          <sc-if value="{{ wideNav }}" hint-placeholder-val="{{ true }}">
         <div style="position:relative;flex:1 1 auto;min-width:0;overflow:hidden;mask-image:linear-gradient(90deg,transparent 0,#000 10%,#000 90%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 10%,#000 90%,transparent 100%)" aria-label="Practices we produce for">
               <div class="gm-marquee-track" style="display:flex;width:max-content;animation:gm-marquee 52s linear infinite">
                 <div style="display:flex;align-items:center;gap:52px;padding-right:52px">
@@ -84,12 +91,10 @@
                 </div>
               </div>
         </div>
-          </sc-if>
-          <sc-if value="{{ narrowNav }}" hint-placeholder-val="{{ false }}">
-            <div style="flex:1 1 auto"></div>
-          </sc-if>
           <div style="display:flex;align-items:center;gap:10px;flex:none">
-            <a href="#book" style="border:1px solid rgba(236,228,214,0.55);color:#efe9df;font-size:12px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;padding:0 22px;height:48px;display:flex;align-items:center;border-radius:999px;white-space:nowrap" style-hover="background:#ece4d6;color:#0e0d0c;border-color:#ece4d6">Book a Call</a>
+            <sc-if value="{{ wideNav }}" hint-placeholder-val="{{ true }}">
+              <a href="#book" style="border:1px solid rgba(236,228,214,0.55);color:#efe9df;font-size:12px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;padding:0 22px;height:48px;display:flex;align-items:center;border-radius:999px;white-space:nowrap" style-hover="background:#ece4d6;color:#0e0d0c;border-color:#ece4d6">Book a Call</a>
+            </sc-if>
             <button type="button" onClick="{{ toggleMenu }}" aria-label="Menu" aria-expanded="{{ menuOpen }}" style="width:48px;height:48px;flex:none;border-radius:999px;border:1px solid rgba(255,255,255,0.18);background:transparent;color:#efe9df;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0" style-hover="background:rgba(255,255,255,0.06)">
               <span style="width:18px;height:1.5px;background:#efe9df;display:block"></span>
               <span style="width:18px;height:1.5px;background:#efe9df;display:block"></span>
@@ -98,42 +103,6 @@
           </div>
         </div>
       </div>
-      <sc-if value="{{ narrowNav }}" hint-placeholder-val="{{ false }}">
-        <div style="display:flex;padding:10px 4px 0">
-        <div style="position:relative;flex:1 1 auto;min-width:0;overflow:hidden;mask-image:linear-gradient(90deg,transparent 0,#000 10%,#000 90%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 10%,#000 90%,transparent 100%)" aria-label="Practices we produce for">
-              <div class="gm-marquee-track" style="display:flex;width:max-content;animation:gm-marquee 52s linear infinite">
-                <div style="display:flex;align-items:center;gap:52px;padding-right:52px">
-                  <img src="assets/logos/1631311463288-v2.png" alt="Sarah Winter Dental" style="height:29px;width:auto;opacity:0.72;display:block" />
-                  <img src="assets/logos/cova-dental-logo.png" alt="Cova Dental" style="height:27px;width:auto;opacity:0.72;display:block" />
-                  <img src="assets/logos/kelly-dental-logo-rgb-black-horizontal.png" alt="Kelly Dental" style="height:27px;width:auto;opacity:0.72;display:block" />
-                  <img src="assets/logos/spodak-logo-512x512.png" alt="Spodak Dental Group" style="height:31px;width:auto;opacity:0.72;display:block" />
-                  <img src="assets/logos/logo.png" alt="Fort Bend Dental" style="height:29px;width:auto;opacity:0.72;display:block" />
-                  <img src="assets/logos/woodside-dental-v2.png" alt="Woodside Dental Group" style="height:29px;width:auto;opacity:0.72;display:block" />
-                  <img src="assets/logos/images.png" alt="Luca Aesthetic" style="height:27px;width:auto;opacity:0.72;display:block" />
-                  <img src="assets/logos/channels4-profile-v2.png" alt="Race Track Smiles" style="height:30px;width:auto;opacity:0.72;display:block" />
-                  <img src="assets/logos/logo-copy.png" alt="Landmark Dental Studio" style="height:36px;width:auto;opacity:0.72;display:block" />
-                  <img src="assets/logos/intermountain-health-logo.png" alt="Intermountain Health" style="height:27px;width:auto;opacity:0.72;display:block" />
-                  <img src="assets/logos/bulletproof-dental.png" alt="Bulletproof Dental Practice" style="height:26px;width:auto;opacity:0.72;display:block" />
-                  <img src="assets/logos/envision-dental-spa-white.png" alt="Envision Dental Spa" style="height:33px;width:auto;opacity:0.72;display:block" />
-                </div>
-                <div aria-hidden="true" style="display:flex;align-items:center;gap:52px;padding-right:52px">
-                  <img src="assets/logos/1631311463288-v2.png" alt="" style="height:29px;width:auto;opacity:0.72;display:block" />
-                  <img src="assets/logos/cova-dental-logo.png" alt="" style="height:27px;width:auto;opacity:0.72;display:block" />
-                  <img src="assets/logos/kelly-dental-logo-rgb-black-horizontal.png" alt="" style="height:27px;width:auto;opacity:0.72;display:block" />
-                  <img src="assets/logos/spodak-logo-512x512.png" alt="" style="height:31px;width:auto;opacity:0.72;display:block" />
-                  <img src="assets/logos/logo.png" alt="" style="height:29px;width:auto;opacity:0.72;display:block" />
-                  <img src="assets/logos/woodside-dental-v2.png" alt="" style="height:29px;width:auto;opacity:0.72;display:block" />
-                  <img src="assets/logos/images.png" alt="" style="height:27px;width:auto;opacity:0.72;display:block" />
-                  <img src="assets/logos/channels4-profile-v2.png" alt="" style="height:30px;width:auto;opacity:0.72;display:block" />
-                  <img src="assets/logos/logo-copy.png" alt="" style="height:36px;width:auto;opacity:0.72;display:block" />
-                  <img src="assets/logos/intermountain-health-logo.png" alt="" style="height:27px;width:auto;opacity:0.72;display:block" />
-                  <img src="assets/logos/bulletproof-dental.png" alt="" style="height:26px;width:auto;opacity:0.72;display:block" />
-                  <img src="assets/logos/envision-dental-spa-white.png" alt="" style="height:33px;width:auto;opacity:0.72;display:block" />
-                </div>
-              </div>
-        </div>
-        </div>
-      </sc-if>
       <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
         <div style="position:absolute;top:78px;right:0;width:min(300px,100%);background:rgba(18,17,15,0.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.12);border-radius:22px;padding:10px;display:flex;flex-direction:column;gap:2px;box-shadow:0 18px 50px rgba(0,0,0,0.5)">
           <a href="gages-story.html" onClick="{{ closeMenu }}" style="color:#efe9df;font-size:15px;font-weight:400;letter-spacing:0.02em;padding:13px 14px;border-radius:12px;min-height:44px;display:flex;align-items:center" style-hover="background:rgba(255,255,255,0.06);color:#efe9df">Gage's Story</a>
@@ -147,7 +116,7 @@
   </div>
 
   <div id="top" style="position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.08);background:#0c0c0d">
-    <video data-gm-loop="" autoplay="" data-gm-start="0" src="assets/broll/hero.mp4" poster="assets/broll/poster-hero.jpg" muted="" loop="" playsinline="" preload="metadata" disablepictureinpicture="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;opacity:0.58;filter:grayscale(1) contrast(1.1) brightness(0.95)"></video>
+    <video class="gm-hero-video" data-gm-loop="" autoplay="" data-gm-start="0" src="assets/broll/hero.mp4" poster="assets/broll/poster-hero.jpg" muted="" loop="" playsinline="" preload="metadata" disablepictureinpicture="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;opacity:0.58;filter:grayscale(1) contrast(1.1) brightness(0.95)"></video>
     <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(12,12,13,0.35) 0%,rgba(12,12,13,0.5) 55%,rgba(12,12,13,0.65) 100%)"></div>
     <div class="gm-hero-inner" style="position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:56px 24px 48px;min-height:calc(100svh - 240px);display:flex;flex-direction:column;justify-content:center">
       <div style="display:grid;grid-template-columns:minmax(0,1fr);max-width:820px">
@@ -167,24 +136,24 @@
           </div>
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:16px;margin-top:56px">
-        <div style="min-width:0;padding:30px 30px 28px;border-radius:22px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)">
-          <div style="font-family:'Cormorant Garamond', 'Times New Roman', serif;font-size:clamp(40px,4.4vw,56px);font-weight:500;line-height:1;letter-spacing:-0.01em;color:#efe9df">400%</div>
+      <div class="gm-stats" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:16px;margin-top:56px">
+        <div class="gm-stat" style="min-width:0;padding:30px 30px 28px;border-radius:22px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)">
+          <div class="gm-stat-v" style="font-family:'Cormorant Garamond', 'Times New Roman', serif;font-size:clamp(40px,4.4vw,56px);font-weight:500;line-height:1;letter-spacing:-0.01em;color:#efe9df">400%</div>
           <div style="margin-top:14px;font-size:11.5px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.6);line-height:1.5">Increase in revenue</div>
           <div style="margin-top:8px;font-size:13px;font-weight:400;color:#c7ab7e;letter-spacing:0.02em">Dr. Jordan Davis</div>
         </div>
-        <div style="min-width:0;padding:30px 30px 28px;border-radius:22px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)">
-          <div style="font-family:'Cormorant Garamond', 'Times New Roman', serif;font-size:clamp(40px,4.4vw,56px);font-weight:500;line-height:1;letter-spacing:-0.01em;color:#efe9df">6,600%</div>
+        <div class="gm-stat" style="min-width:0;padding:30px 30px 28px;border-radius:22px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)">
+          <div class="gm-stat-v" style="font-family:'Cormorant Garamond', 'Times New Roman', serif;font-size:clamp(40px,4.4vw,56px);font-weight:500;line-height:1;letter-spacing:-0.01em;color:#efe9df">6,600%</div>
           <div style="margin-top:14px;font-size:11.5px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.6);line-height:1.5">View increase in month one</div>
           <div style="margin-top:8px;font-size:13px;font-weight:400;color:#c7ab7e;letter-spacing:0.02em">Jen Friedman</div>
         </div>
-        <div style="min-width:0;padding:30px 30px 28px;border-radius:22px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)">
-          <div style="font-family:'Cormorant Garamond', 'Times New Roman', serif;font-size:clamp(40px,4.4vw,56px);font-weight:500;line-height:1;letter-spacing:-0.01em;color:#efe9df">200M+</div>
+        <div class="gm-stat" style="min-width:0;padding:30px 30px 28px;border-radius:22px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)">
+          <div class="gm-stat-v" style="font-family:'Cormorant Garamond', 'Times New Roman', serif;font-size:clamp(40px,4.4vw,56px);font-weight:500;line-height:1;letter-spacing:-0.01em;color:#efe9df">200M+</div>
           <div style="margin-top:14px;font-size:11.5px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.6);line-height:1.5">Views produced</div>
           <div style="margin-top:8px;font-size:13px;font-weight:400;color:#c7ab7e;letter-spacing:0.02em">Across all our accounts</div>
         </div>
-        <div style="min-width:0;padding:30px 30px 28px;border-radius:22px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)">
-          <div style="font-family:'Cormorant Garamond', 'Times New Roman', serif;font-size:clamp(40px,4.4vw,56px);font-weight:500;line-height:1;letter-spacing:-0.01em;color:#efe9df">All</div>
+        <div class="gm-stat" style="min-width:0;padding:30px 30px 28px;border-radius:22px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)">
+          <div class="gm-stat-v" style="font-family:'Cormorant Garamond', 'Times New Roman', serif;font-size:clamp(40px,4.4vw,56px);font-weight:500;line-height:1;letter-spacing:-0.01em;color:#efe9df">All</div>
           <div style="margin-top:14px;font-size:11.5px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.6);line-height:1.5">Your time back</div>
         </div>
       </div>
