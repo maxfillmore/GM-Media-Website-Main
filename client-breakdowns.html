@@ -389,7 +389,7 @@ const CLIENTS = [
     reels: [
       { url: 'https://www.instagram.com/reel/DK1uSCmuqgl/', views: '196K' },
       { url: 'https://www.instagram.com/reel/DYXr3ZKPzKh/', views: '101K' },
-      { url: 'https://www.instagram.com/reel/DQsKdgYkvUc/', label: 'Branding video' }
+      { url: 'https://www.instagram.com/reel/DcMIOEThKdD/', views: '219K', thumb: null }
     ]
   },
   {
@@ -626,9 +626,9 @@ class Component extends DCLogic {
           views: r.views || '—',
           viewsLabel: r.label || (r.views ? 'views' : 'views pending'),
           label: 'Reel ' + (n + 1) + ' on ' + (/tiktok\.com/.test(r.url) ? 'TikTok' : 'Instagram'),
-          thumb: r.thumb || ('assets/reels/reel-' + c.id + '-' + (n + 1) + '.webp'),
-          hasThumb: true,
-          noThumb: false,
+          thumb: r.thumb === null ? '' : (r.thumb || ('assets/reels/reel-' + c.id + '-' + (n + 1) + '.webp')),
+          hasThumb: r.thumb !== null,
+          noThumb: r.thumb === null,
           slotId: 'reel-' + c.id + '-' + (n + 1)
         }))
       },
