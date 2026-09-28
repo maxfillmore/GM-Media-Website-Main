@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,900&text=1M&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; background: #0c0c0d; }
@@ -36,6 +37,9 @@
     .gm-marquee-track { animation-duration: 24s !important; }
     .gm-hero-stat { margin-left: 0 !important; padding: 30px 26px !important; }
     .gm-hero-cta { margin-top: 40px !important; }
+    .gm-guarantee { margin-top: 28px !important; padding: 12px 16px !important; gap: 10px !important; border-radius: 14px !important; }
+    .gm-guarantee > span:first-child { width: 24px !important; height: 24px !important; font-size: 12px !important; }
+    .gm-guarantee > span:last-child { font-size: 19px !important; }
     .gm-hero-cta a { flex: 1 1 100%; justify-content: center; text-align: center; }
     .gm-thumb-grid { grid-template-columns: repeat(4, 1fr) !important; }
     .gm-foot-link { min-height: 44px; display: flex; align-items: center; }
@@ -138,6 +142,10 @@
             <a href="client-breakdowns.html" style="border:1px solid rgba(255,255,255,0.22);color:#efe9df;font-size:13.5px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;padding:19px 32px;border-radius:999px" style-hover="background:rgba(255,255,255,0.06);color:#efe9df">Look Into Our World</a>
           </div>
         </div>
+      </div>
+      <div class="gm-guarantee" style="display:flex;align-items:center;justify-content:center;gap:14px;margin-top:40px;padding:16px 24px;border-radius:18px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);width:100%;box-sizing:border-box">
+        <span aria-hidden="true" style="flex:none;width:30px;height:30px;border-radius:999px;border:1px solid #c7ab7e;color:#c7ab7e;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600">&#10003;</span>
+        <span style="font-family:'Cormorant Garamond', 'Times New Roman', serif;font-size:clamp(22px,2.2vw,30px);font-weight:600;line-height:1.15;letter-spacing:-0.005em;color:#efe9df;text-align:center;text-wrap:balance">You get <span style="font-family:'Archivo', 'Jost', sans-serif;font-weight:900;font-stretch:125%;font-size:0.9em;letter-spacing:0.01em;color:#c7ab7e">1M</span> views or you don't pay</span>
       </div>
       <div class="gm-stats" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:16px;margin-top:56px">
         <div class="gm-stat" style="min-width:0;padding:30px 30px 28px;border-radius:22px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)">
