@@ -140,17 +140,27 @@
         <span style="width:0;height:0;border-left:7px solid currentColor;border-top:5px solid transparent;border-bottom:5px solid transparent;display:block"></span>
       </span>
     </div>
-    <div class="gm-rail" style="display:flex;gap:10px;overflow-x:auto;padding-bottom:14px;margin-bottom:34px;scrollbar-width:thin">
-      <sc-for list="{{ chips }}" as="c" hint-placeholder-count="8">
-        <button type="button" onClick="{{ c.select }}" style="{{ c.chipStyle }}">
+    <div ref="{{ railRef }}" class="gm-rail" style="display:flex;gap:10px;overflow-x:auto;padding:4px 24px 14px;margin:0 -24px 14px;scroll-snap-type:x proximity;scroll-padding:0 24px;scrollbar-width:none;-webkit-overflow-scrolling:touch">
+      <sc-for list="{{ chips }}" as="c" hint-placeholder-count="5">
+        <button type="button" data-chip="{{ c.idx }}" onClick="{{ c.select }}" aria-pressed="{{ c.on }}" style="{{ c.chipStyle }}">
           <span role="img" aria-label="{{ c.short }}" style="{{ c.photoStyle }}"></span>
-          <span>{{ c.short }}</span>
+          <span style="{{ c.nameStyle }}">{{ c.short }}</span>
+          <span style="{{ c.tagStyle }}">{{ c.tag }}</span>
         </button>
       </sc-for>
-      <a href="#calendar" style="display:flex;align-items:center;gap:9px;flex:none;padding:8px 16px 8px 9px;min-height:44px;border-radius:999px;border:1px dashed rgba(199,171,126,0.3);background:rgba(199,171,126,0.04);text-decoration:none;font-size:13.5px;font-weight:500;color:#efe9df;white-space:nowrap">
-        <span aria-hidden="true" style="width:30px;height:30px;border-radius:999px;flex:none;border:1px dashed rgba(199,171,126,0.33);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:500;color:#c7ab7e">+</span>
-        <span>Your practice next</span>
+      <a href="#calendar" style="display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:8px;flex:none;width:96px;padding:14px 8px 12px;border-radius:18px;border:1px dashed rgba(199,171,126,0.35);background:rgba(199,171,126,0.04);text-decoration:none;scroll-snap-align:start">
+        <span aria-hidden="true" style="width:64px;height:64px;border-radius:999px;flex:none;border:1px dashed rgba(199,171,126,0.4);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:400;color:#c7ab7e">+</span>
+        <span style="font-size:13.5px;font-weight:500;color:#efe9df;line-height:1.2;text-align:center">You next</span>
+        <span style="font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#c7ab7e">Book</span>
       </a>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:30px">
+      <button type="button" onClick="{{ prevClient }}" aria-label="Previous client" style="width:44px;height:44px;flex:none;border-radius:999px;border:1px solid rgba(255,255,255,0.14);background:#151412;color:#efe9df;font-family:inherit;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center">‹</button>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0">
+        <span style="font-size:10.5px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#c7ab7e">Viewing {{ activePos }}</span>
+        <span style="font-family:'Cormorant Garamond', 'Times New Roman', serif;font-size:21px;font-weight:500;color:#efe9df;line-height:1.15;text-align:center">{{ active.name }}</span>
+      </div>
+      <button type="button" onClick="{{ nextClient }}" aria-label="Next client" style="width:44px;height:44px;flex:none;border-radius:999px;border:1px solid rgba(255,255,255,0.14);background:#151412;color:#efe9df;font-family:inherit;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center">›</button>
     </div>
   </div>
   </sc-if>
@@ -537,6 +547,16 @@ class Component extends DCLogic {
     sweep();
   }
 
+  railRef = React.createRef();
+
+  pickChip(n) {
+    this.setState({ active: n }, () => {
+      const rail = this.railRef.current;
+      const el = rail && rail.querySelector('[data-chip="' + n + '"]');
+      if (el) rail.scrollTo({ left: el.offsetLeft - (rail.clientWidth - el.offsetWidth) / 2, behavior: 'smooth' });
+    });
+  }
+
   renderVals() {
     const wide = this.state.wide;
     const i = this.state.active;
@@ -573,14 +593,30 @@ class Component extends DCLogic {
       countLabel: CLIENTS.length + ' practice result breakdowns',
 
       showChips: !wide,
-      chips: wide ? [] : CLIENTS.map((x, n) => ({
-        short: x.short,
-        photoStyle: 'width:30px;height:30px;border-radius:999px;flex:none;display:block;border:1px solid rgba(255,255,255,0.18);background-image:url("' + x.photo + '");background-size:' + (x.zoom || 'cover') + ';background-position:' + (x.focus || '50% 50%') + ';',
-        select: select(n),
-        chipStyle: chipBase + (n === i
-          ? 'background:rgba(199,171,126,0.08);border:1px solid rgba(199,171,126,0.28);color:#efe9df;'
-          : 'background:#151412;border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.65);')
-      })),
+      railRef: this.railRef,
+      activePos: (i + 1) + ' of ' + CLIENTS.length,
+      prevClient: () => this.pickChip((i - 1 + CLIENTS.length) % CLIENTS.length),
+      nextClient: () => this.pickChip((i + 1) % CLIENTS.length),
+      chips: wide ? [] : CLIENTS.map((x, n) => {
+        const on = n === i;
+        return {
+          idx: String(n),
+          on,
+          short: x.short,
+          tag: on ? 'Viewing' : 'View',
+          photoStyle: 'width:64px;height:64px;border-radius:999px;flex:none;display:block;background-image:url("' + x.photo + '");background-size:' + (x.zoom || 'cover') + ';background-position:' + (x.focus || '50% 50%') + ';transition:box-shadow 180ms ease,filter 180ms ease;' + (on
+            ? 'box-shadow:0 0 0 2px #151412,0 0 0 4px #c7ab7e;filter:none;'
+            : 'box-shadow:0 0 0 1px rgba(255,255,255,0.18);filter:grayscale(0.6) brightness(0.8);'),
+          nameStyle: 'font-size:13.5px;font-weight:500;line-height:1.2;text-align:center;color:' + (on ? '#efe9df' : 'rgba(255,255,255,0.7)') + ';',
+          tagStyle: 'font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:3px 8px;border-radius:999px;' + (on
+            ? 'background:#c7ab7e;color:#0c0c0d;'
+            : 'background:transparent;color:rgba(255,255,255,0.4);'),
+          select: () => this.pickChip(n),
+          chipStyle: 'display:flex;flex-direction:column;align-items:center;gap:8px;flex:none;width:96px;padding:14px 8px 12px;border-radius:18px;cursor:pointer;font-family:inherit;scroll-snap-align:start;transition:background 180ms ease,border-color 180ms ease;' + (on
+            ? 'background:rgba(199,171,126,0.1);border:1px solid #c7ab7e;'
+            : 'background:#151412;border:1px solid rgba(255,255,255,0.08);')
+        };
+      }),
 
       rows: wide ? CLIENTS.map((x, n) => ({
         name: x.name,
