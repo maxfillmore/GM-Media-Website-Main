@@ -514,6 +514,8 @@ const CLIENTS = [
     instagram: ''
   }
 ];
+const __blobUrl = d => { const k = d.indexOf(','); const mime = d.slice(5, d.indexOf(';')); const bin = atob(d.slice(k + 1)); const u = new Uint8Array(bin.length); for (let j = 0; j < bin.length; j++) u[j] = bin.charCodeAt(j); return URL.createObjectURL(new Blob([u], { type: mime })); };
+CLIENTS.forEach(c => { ['photo', 'photo2', 'logo', 'logo2'].forEach(f => { if (c[f] && c[f].startsWith('data:')) c[f] = __blobUrl(c[f]); }); (c.reels || []).forEach(r => { if (r.thumb && r.thumb.startsWith('data:')) r.thumb = __blobUrl(r.thumb); }); });
 
 class Component extends DCLogic {
   state = { wide: true, menuOpen: false, active: 0 };
